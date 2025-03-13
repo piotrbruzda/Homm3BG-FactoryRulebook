@@ -1,14 +1,16 @@
 <div align="center">
-  <h1>Heroes of Might & Magic III: The Board Game<br>Rule Book Rewrite Project</h1>
+  <h1>Heroes of Might & Magic III: The Board Game<br>Factory Expansion</h1>
 
   <p align="center">
     <img src="https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white">
-    <a href="https://discord.gg/Y4uM9pPWF6"><img src="https://dcbadge.limes.pink/api/server/Y4uM9pPWF6"></a>
+    <a href="https://discord.gg/BT68v3JKUq"><img src="https://dcbadge.limes.pink/api/server/BT68v3JKUq"></a>
   </p>
 </div>
 
-**Join us [on Discord](https://discord.gg/khV8Ckw8RD) to help with translating or just to get in touch!**
+**Join us [on Factory thread on Archon Studio Discord](https://discord.com/channels/740870068178649108/1234890221880082444) to help with translating or just to get in touch!**
 
+[//]: # (TODO: Finish table with releases/translations)
+<!---
 <table>
     <thead>
         <tr>
@@ -121,6 +123,8 @@
         </tr>
     </tbody>
 </table>
+-->
+
 
 <details>
 <summary>Click to see the details regarding every version</summary>
@@ -154,6 +158,8 @@ Its aim is to explain the rules clearly and concisely, and should eventually hav
 
 Please see the original thread on [BoardGameGeek](https://boardgamegeek.com/thread/3235221/rule-book-rewrite-project/page/1).
 
+[//]: # (TODO: add link)
+
 The content in the official English rule book is, simply put, insufficient as a teaching tool for the game or as a general rules reference.
 If you read the thread linked above you should understand how frustrating this has been for me.
 
@@ -165,11 +171,11 @@ This repository serves both as a means to preserve the work, but also for others
 ### 💪 Contributing
 
 Please discuss any and all factual errors, bad language or other errors you've found.
-You can do this by opening issues/PRs with suggestions, writing in the BGG thread, or joining us [on Discord](https://discord.gg/Y4uM9pPWF6).
+You can do this by opening issues/PRs with suggestions, writing in the BGG thread, or joining us [on Discord](https://discord.com/channels/740870068178649108/1234890221880082444).
 
 ### 🔮 The Future
 
-All new version of the rule book and their change logs will be published here and in the BGG thread.
+All new version of the mission book and their change logs will be published here.
 
 ## 💻 Local Development
 
@@ -347,15 +353,16 @@ Their respective XCF files reside in [`assets/gimp-files`](https://github.com/He
 
 ## Star History
 
-<a href="https://star-history.com/#Heegu-sama/Homm3BG&Date">
+<a href="https://star-history.com/#piotrbruzda/Homm3BG-FactoryRulebook&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Heegu-sama/Homm3BG&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Heegu-sama/Homm3BG&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Heegu-sama/Homm3BG&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=piotrbruzda/Homm3BG-FactoryRulebook,piotrbruzda/Homm3BG-Factory&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=piotrbruzda/Homm3BG-FactoryRulebook,piotrbruzda/Homm3BG-Factory&type=Date" />
+    <img alt="Star History Chart" src="https://www.star-history.com/#piotrbruzda/Homm3BG-FactoryRulebook&piotrbruzda/Homm3BG-Factory&Date" />
   </picture>
 </a>
 
 ## 🛡️ Other Community Projects
 
+- [Rule Book Rewrite Project](https://github.com/Heegu-sama/Homm3BG)
 - [Fan-Made Mission Book](https://github.com/qwrtln/Homm3BG-mission-book)
 - [Board Game Cards Databse](https://github.com/Mirzipan/Homm3_BG_Database)

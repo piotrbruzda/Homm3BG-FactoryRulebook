@@ -43,6 +43,16 @@
 \usepackage[most]{tcolorbox}
 \usepackage{catchfile}
 \usepackage{xstring}
+\usepackage{soul}
+\usepackage{xifthen}
+\usepackage{xparse}
+
+\usepackage{tocloft}
+\renewcommand{\cftsubsecpagefont}{\bfseries}
+
+\usepackage[hang, symbol, perpage]{footmisc}
+\renewcommand{\footnotemargin}{1em}
+
 \newtcolorbox{scaledfigure}[1][]{height fill, space to=\myspace,#1}
 \hypersetup{
   colorlinks=true,
@@ -67,6 +77,8 @@
 \renewcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
 \renewcommand\cftsecdotsep{\cftdot}
 \renewcommand\cftsubsecdotsep{\cftdot}
+
+
 
 \captionsetup[figure]{labelformat=empty}
 \captionsetup[subfigure]{labelformat=empty, singlelinecheck=off, justification=centering}
@@ -108,8 +120,10 @@
 \def\tables{\_assets/tables}
 \def\qr{\_assets/qr-codes}
 
-\def\repourl{https://github.com/Heegu-sama/Homm3BG}
-\def\bggthreadurl{https://boardgamegeek.com/thread/3235221/rule-book-rewrite-project}
+\def\repourl{https://github.com/piotrbruzda/Homm3BG-FactoryRulebook}
+\def\originalrepourl{https://github.com/Heegu-sama/Homm3BG}
+\def\bggthreadurl{https://boardgamegeek.com/}
+% TODO: Update links
 
 \renewcommand{\labelitemi}{\includegraphics[width=0.7em, valign=c]{\layout/listdot.png}}
 
@@ -131,6 +145,25 @@
   \includesvg[height=#1px]{\svgs/\detokenize{#2}.svg}%
 }%
 
+% Command to insert a subsection separator image
+\newcommand{\subsdivider}{%
+    \begin{center}
+        \includegraphics[width=\linewidth,height=1.2em,keepaspectratio]{\layout/subsection_separator.png}
+    \end{center}
+    \vspace{-0.5em} % Adjust vertical spacing if needed
+}
+
+\newcommand{\subheader}[1]{%
+    \begin{center}
+        \textbf{\Large\scshape #1} % Wyświetlenie nagłówka bez powielenia
+        \\[0.05em] % Odstęp
+        \includegraphics[width=\linewidth,height=1em,keepaspectratio]{\layout/subsection_separator.png}
+    \end{center}
+}
+
+
+
+
 % Command to frame images
 \newcommand\framedimage[2][]{%
   \begin{tikzpicture}
@@ -148,12 +181,19 @@
 \enspace SECTION \thesection\enspace}
 {8pt}
 {\Huge\bfseries\filcenter\uppercase}
+
 %Create section heading with graphics. Argument one is heading name, argument two is picture to use on the left.
 \providecommand{\sectionheadertext}[1]{
   \fontfamily{ptm}\selectfont{
     \color{antiquewhite} \section*{\MakeUppercase{#1}}
   }
 }
+
+\newcommand{\sectioncampaignheadertext}[2][antiquewhite]{
+  \color{#1}\MakeUppercase{\textbf{\liberation #2}}
+}
+
+
 \newcommand{\addsection}[3][1]{
   \def\oneliner{\equal{#1}{1}}
   \vspace*{-5em}
@@ -224,6 +264,98 @@
     \end{pgfonlayer}
   \end{tikzpicture}
 }
+
+% Four mandatory params
+% - [optional] set to "subsection" or any other Level if you want to have this as a subsection in TOC
+% - Lines of Campaign Name (1-2 according to the name length)
+% - Campaign Name
+% - Scenario Name
+% - Icon
+%
+% TODO: possibly replace the whole \addsection with this
+\newcommand{\addscenariosection}[5][section]{
+  \sodef\sotitle{}{0.2em}{0.6em}{1.2em}
+  \def\oneliner{\equal{#2}{1}}
+
+  \vspace*{-5.72em}
+  \hspace*{-1.3em}
+  \makebox[0pt][l]{
+  \raisebox{-\totalheight}[0pt][7pt]{
+    \ifthenelse{\oneliner}{\def\yscale{1}}{\def\yscale{1.3}}
+      \begin{tikzpicture}
+        \draw (0, 0) node[inner sep=0, yscale=\yscale] (header){\makebox[1.015\textwidth][c]{\includegraphics[width=1.055\linewidth, height=0.24\linewidth]{\layout/section_heading.png}}};
+        \draw (-6.7, 0) node {\includegraphics[width=0.135\textwidth]{#5}};
+      \end{tikzpicture}
+    }
+  }
+  \begin{fullwidth}[leftmargin=0.21\textwidth]
+    \begin{center}
+      \vspace{\lang_header_adjustment}
+      \vspace{-12pt}
+      \section*{\sectioncampaignheadertext{\small{\sotitle{#3}}}}
+      \vspace{\lang_header_adjustment}
+      \vspace{-10pt}
+      \section*{\sectioncampaignheadertext{#4}}
+      \ifthenelse{\oneliner}{}{\vspace{14pt}}
+      \cleardoublepage\phantomsection\addcontentsline{toc}{#1}{\protect\numberline{} {} {} {} {}#4}
+      \pagetarget{#4}{}
+    \end{center}
+  \end{fullwidth}
+  \ifthenelse{\oneliner}{\vspace{1.75em}}{\vspace{0.75em}}
+  \vspace{\lang_header_adjustment}
+}
+
+% Apply language-specific subsection spacings if defined
+\ifdefined\subsectionspacing
+  \subsectionspacing{}
+\fi
+
+\newcommand\picdims[4][]{%
+  \setbox0=\hbox{\includegraphics[#1]{#4}}%
+  \clipbox{.5\dimexpr\wd0-#2\relax{} %
+    .5\dimexpr\ht0-#3\relax{} %
+    .5\dimexpr\wd0-#2\relax{} %
+    .5\dimexpr\ht0-#3\relax}{\includegraphics[#1]{#4}}}
+
+\tikzset{
+  thick/.style=      {line width=1.3pt},
+  very thick/.style= {line width=1.7pt},
+  ultra thick/.style={line width=2.2pt}
+}
+
+\definecolor{borderoutyellow}{HTML}{DBCA86}
+\definecolor{borderinyellow}{HTML}{B09E69}
+\definecolor{bordermidyellow}{HTML}{6f6749}
+% Create note box
+\newcommand{\notefont}[0]{\liberation\selectfont}
+\newcommand{\note}[2]{
+  \begin{tikzpicture}
+    \draw (0, 0) node[inner sep=0] {\makebox[\linewidth][c]{\picdims[width=\linewidth]{\linewidth}{#1\baselineskip}{\layout/table-background.jpg}}};
+    \draw [borderoutyellow, very thick] (current bounding box.north west) rectangle (current bounding box.south east);
+    \draw [borderinyellow, thick] ([xshift=+2.8pt, yshift=-2.8pt] current bounding box.north west) rectangle ([xshift=-2.8pt, yshift=2.8pt] current bounding box.south east);
+    \node at (current bounding box.center) {
+      \begin{varwidth}{0.85\linewidth}
+      \notefont{
+        \color{arylideyellow}
+        \hypersetup{linkcolor=amber}
+        #2
+        \hypersetup{linkcolor=goldenbrown}
+      }
+      \end{varwidth}
+    };
+    \begin{pgfonlayer}{background}
+      \begin{scope}[blend mode=multiply]
+        \draw [shade, blur shadow={shadow opacity=15}] (current bounding box.north west) rectangle (current bounding box.south east);
+      \end{scope}
+    \end{pgfonlayer}
+  \end{tikzpicture}
+}
+
+
+
+
+
+
 
 % Create Heroes-styled framed canvas for a table. Accepts three arguments:
 % 1) [Optional] Drop shadow description. Use [] as the first arg to delete it.
@@ -337,7 +469,7 @@
 
 % Let main_xx.tex provide translated \author
 \ifdefvoid{\translatedauthor}{
-  \author{\textlang{english}{Hermanni ``Heegu'' Karppela}}
+  \author{\textlang{english}{Piotr Bruzda}}
 }{
   \author{\translatedauthor}
 }
@@ -364,6 +496,7 @@
   }
 \end{center}
 
+%TODO: Update QR codes
 \iftoggle{printable}{
   \begin{multicols}{2}
   \centering
@@ -377,6 +510,7 @@
   \end{multicols}
 }{}
 
+% TODO: improve Factory castle graphics
 \textlang{english}{\begin{tikzpicture}[remember picture, overlay]
   \node(cover)[anchor=center, yshift=12em] at (current page.south) {
     \includegraphics[width=1.01\paperwidth, keepaspectratio]{\art/castle_bottom.png}
@@ -385,58 +519,51 @@
 \end{tikzpicture}}
 
 \clearpage
+In the heart of Jadame, the Factory rises as a beacon of progress amidst the desolation.
+Born from the exodus of Halflings and refugees fleeing the Kreegan invasion of Eeofol, these innovators have forged a new future in Burton, igniting a wave of Factory towns across Terra Nova.
+
+Here, mercenaries and artificers unite, commanding tamed exotic beasts and mechanical marvels in the Wasteland.
+Armed with guns and flamethrowers, they stand ready to defend their realm.
+The Factory buzzes with anticipation, eager for bold adventurers to step forth.
+
+Will you embrace the challenge and harness the technological might of the Factory to etch your legend into the annals of history?
+
+In this expansion for \textbf{Heroes of Might and Magic III: The Board Game}, you will discover a host of new features, including Quests, a new faction, a new scenario, a few optional rules for the Core Game, as well as a dedicated campaign.
+
+\bigskip
 
 \begin{multicols*}{2}
 \tableofcontents
 \vspace*{\fill}
 \columnbreak
 \vspace*{\fill}
-\includegraphics[width=\linewidth]{\art/black_dragon.jpg}
+\includegraphics[width=\linewidth]{\art/crimson_couatl.jpg}
 \end{multicols*}
 
 \clearpage
 
-\include{\sections/introduction.tex}
-
-\include{\sections/game_modes.tex}
-
 \include{\sections/components.tex}
 
-\include{\sections/setup.tex}
-
-\include{\sections/round_structure.tex}
-
-\include{\sections/player_turns.tex}
-
-\include{\sections/heroes.tex}
-
-\include{\sections/deckbuilding.tex}
-
-\include{\sections/resources.tex}
-
-\include{\sections/town.tex}
-
-\include{\sections/map_elements.tex}
-
-\iftoggle{printable_quote_separate_page}{
-  \include{\sections/quote_page.tex}
-}{}
-
-\include{\sections/units.tex}
-
-\include{\sections/combat.tex}
-
-\include{\sections/ai_rules.tex}
-
-\include{\sections/difficulty.tex}
-
-\include{\sections/trading.tex}
-
-\include{\sections/scenario_end.tex}
-
-\include{\sections/expansion_content.tex}
+\include{\sections/new_elements.tex}
 
 \include{\sections/all_map_locations.tex}
+
+
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{section}{Scenarios}
+%\include{\sections/scenarios/template.tex}
+
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{subsection}{Factory Campaign}
+
+%\sectionheadertext{Factory Campaign}
+%\section{Factory Campaign}
+
+\include{\sections/campaigns/1_world_on_fire.tex}
+
+\include{\sections/campaigns/2_beyond_the_horizon.tex}
 
 \iftoggle{printable_notes_page}{\include{\sections/notes.tex}}{}
 
