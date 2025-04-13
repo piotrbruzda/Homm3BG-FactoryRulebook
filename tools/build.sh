@@ -5,7 +5,7 @@
 LANGUAGE="en"
 
 # Valid language codes
-valid_languages=("en" "pl" "es" "fr" "ua" "ru" "cs" "he" "de")
+valid_languages=("en")
 
 # Function to print usage information
 usage() {
@@ -76,11 +76,8 @@ esac
 
 
 case "${LANGUAGE}" in
-  ru|ua|cs|he)
-    ENGINE=-pdflua
-    ;;
   *)
-    ENGINE=-pdf
+    ENGINE=-pdflua
     ;;
 esac
 
