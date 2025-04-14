@@ -55,7 +55,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.SSH_DEPLOY_KEY_BUILD_ARTIFACTS }}
-          external_repository: qwrtln/Homm3BG-FactoryRulebook -build-artifacts
+          external_repository: qwrtln/Homm3BG-FactoryRulebook-build-artifacts
           publish_branch: en
           publish_dir: ./en
           force_orphan: true
