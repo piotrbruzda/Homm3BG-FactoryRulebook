@@ -5,6 +5,7 @@
     <img src="https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white">
     <a href="https://discord.gg/nMbawQkj9R"><img src="https://dcbadge.limes.pink/api/server/nMbawQkj9R"></a>
   </p>
+</div>
 
 **Join us [on Discord](https://discord.gg/nMbawQkj9R) to help with development or just to get in touch!**
 
