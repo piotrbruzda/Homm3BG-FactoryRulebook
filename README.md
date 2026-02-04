@@ -146,5 +146,7 @@ As of writing, for English it produces 24 MB `main_en_optimized.pdf` file withou
 
 - [Rule Book Rewrite Project](https://github.com/Heegu-sama/Homm3BG)
 - [Fan-Made Mission Book](https://github.com/qwrtln/Homm3BG-mission-book)
-- [Board Game Cards Databse](https://github.com/Mirzipan/Homm3_BG_Database)
+- [Game Wiki](https://github.com/Mirzipan/Homm3_BG_Database)
 - [Scenario Map Editor](https://github.com/zedero/HoMM3Boardgame)
+- [Hero Creator](https://github.com/K-Adam/Homm3_hero_creator)
+- [Music Companion PWA](https://github.com/ExeVirus/h3omm_bgm)
